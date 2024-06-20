@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - MYSQL_IP=banco_it_talent
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=senha_root
+      - MYSQL_DATABASE=BANCO_DADOS_IT_TALENT
+    networks:
+      - it_talent_network
+
+  banco_it_talent:
+    image: desafio_it_talent_junho_01
+    environment:
+      - MYSQL_ROOT_PASSWORD=senha_root
+    networks:
+      - it_talent_network
+
+networks:
+  it_talent_network:
+    driver: bridge
